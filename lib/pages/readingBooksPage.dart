@@ -48,7 +48,7 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
     return GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: 6,
+        itemCount: 2,
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
