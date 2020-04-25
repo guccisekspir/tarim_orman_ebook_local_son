@@ -1,4 +1,4 @@
-package com.tarimorman.tarim_orman_ebook
+package tr.gov.tarimorman.ebook
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

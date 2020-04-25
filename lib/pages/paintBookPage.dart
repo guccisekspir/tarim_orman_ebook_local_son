@@ -57,27 +57,29 @@ class _PaintBookPageState extends State<PaintBookPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: GestureDetector(
-                      child:
-                      Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BlocProvider<FirestoreBloc>(
-                                  create: (context) => FirestoreBloc(),
-                                  child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
+                    child: Expanded(
+                      child: GestureDetector(
+                        child:
+                        Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BlocProvider<FirestoreBloc>(
+                                    create: (context) => FirestoreBloc(),
+                                    child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
 
-                              )),
-                        );
-                      },
+                                )),
+                          );
+                        },
+                      ),
                     )),
               ),
               Expanded(
                 child: Text(
                   paintBookNameList[index],
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.start,

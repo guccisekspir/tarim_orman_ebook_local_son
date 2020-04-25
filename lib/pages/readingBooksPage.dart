@@ -54,8 +54,8 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
             children: <Widget>[
               Expanded(
                 child: Container(
-                    width: 140,
-                    height: 170,
+                    width: 100,
+                    height: 130,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -75,14 +75,16 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
                       },
                     )),
               ),
-              Text(
-                bookNameList[index],
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  bookNameList[index],
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.start,
+                  textDirection: TextDirection.ltr,
                 ),
-                textAlign: TextAlign.start,
-                textDirection: TextDirection.ltr,
               )
             ],
           );
