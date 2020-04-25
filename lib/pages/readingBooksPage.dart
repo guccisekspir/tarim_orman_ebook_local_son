@@ -48,31 +48,33 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
     return GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: 2,
+        itemCount: 6,
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
-              Container(
-                  width: 140,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: GestureDetector(
-                    child:
-                        Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BlocProvider<FirestoreBloc>(
-                                create: (context) => FirestoreBloc(),
-                                child: ReadBookPage(
-                                  bookChoice: bookNameFireList[index],
-                                ))),
-                      );
-                    },
-                  )),
+              Expanded(
+                child: Container(
+                    width: 140,
+                    height: 170,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: GestureDetector(
+                      child:
+                          Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BlocProvider<FirestoreBloc>(
+                                  create: (context) => FirestoreBloc(),
+                                  child: ReadBookPage(
+                                    bookChoice: bookNameFireList[index],
+                                  ))),
+                        );
+                      },
+                    )),
+              ),
               Text(
                 bookNameList[index],
                 style: TextStyle(

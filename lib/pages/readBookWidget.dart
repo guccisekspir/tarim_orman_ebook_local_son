@@ -57,12 +57,10 @@ class _ReadBookPageState extends State<ReadBookPage> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom: 20.0,
-                      left: 230.0,
+                    Align(
+                      alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 100),
+                        padding: const EdgeInsets.all(16.0),
                         child: ClipOval(
                           child: Material(
                             color: Colors.blueGrey, // button color

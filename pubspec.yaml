@@ -56,6 +56,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/bookcover/
+    - assets/akillinar/
+    - assets/beceriklidomates/
+    - assets/neselispanak/
+    - assets/guclusarimsak/
     - assets/cesurportakal/
     - assets/sirinelma/
     - assets/paintbookcover/

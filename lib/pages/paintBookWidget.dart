@@ -60,12 +60,10 @@ class _PaintBookWidgetState extends State<PaintBookWidget> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 28.0,
-                      right: 255.0,
+                    Align(
+                      alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 100),
+                        padding: const EdgeInsets.all(16.0),
                         child: ClipOval(
                           child: Material(
                             elevation: 10,
@@ -87,12 +85,10 @@ class _PaintBookWidgetState extends State<PaintBookWidget> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom: 20.0,
-                      left: 230.0,
+                    Align(
+                      alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 100),
+                        padding: const EdgeInsets.all(16.0),
                         child: ClipOval(
                           child: Material(
                             color: Colors.tealAccent, // button color

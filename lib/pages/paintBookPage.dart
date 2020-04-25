@@ -36,7 +36,7 @@ class _PaintBookPageState extends State<PaintBookPage> {
           );
         }
         return Container(
-          child: Text("Bune aq"),
+          child: Text("Hata oluştu"),
         );
       },
     );
@@ -50,35 +50,39 @@ class _PaintBookPageState extends State<PaintBookPage> {
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
-              Container(
-                  width: 140,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: GestureDetector(
-                    child:
-                    Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BlocProvider<FirestoreBloc>(
-                                create: (context) => FirestoreBloc(),
-                                child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
+              Expanded(
+                child: Container(
+                    width: 140,
+                    height: 170,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: GestureDetector(
+                      child:
+                      Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BlocProvider<FirestoreBloc>(
+                                  create: (context) => FirestoreBloc(),
+                                  child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
 
-                            )),
-                      );
-                    },
-                  )),
-              Text(
-                paintBookNameList[index],
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                              )),
+                        );
+                      },
+                    )),
+              ),
+              Expanded(
+                child: Text(
+                  paintBookNameList[index],
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.start,
+                  textDirection: TextDirection.ltr,
                 ),
-                textAlign: TextAlign.start,
-                textDirection: TextDirection.ltr,
               )
             ],
           );
