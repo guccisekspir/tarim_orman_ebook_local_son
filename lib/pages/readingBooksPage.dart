@@ -48,7 +48,7 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
     return GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: images.length,
+        itemCount: 6,
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
@@ -59,15 +59,8 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: GestureDetector(
-                    child: Card(
-                      elevation: 10,
-                      child: FadeInImage.assetNetwork(
-                        // here `bytes` is a Uint8List containing the bytes for the in-memory image
-                        placeholder: 'assets/loading.gif',
-                        image: images[index],
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                    child:
+                        Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
                     onTap: () {
                       Navigator.push(
                         context,

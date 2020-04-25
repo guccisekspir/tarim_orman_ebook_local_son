@@ -1,24 +1,17 @@
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
-
 class BookApiClient {
   static const baseURL =
       "https://firebasestorage.googleapis.com/v0/b/ormanbakanligikitap.appspot.com/o/";
 
   Future<List<String>> getImages(String bookID) async {
     List<String> imageUrls = [];
-    StorageReference firebaseStorage =
-        FirebaseStorage.instance.ref().child("/$bookID");
-    StorageReference istenenImage;
-    String downloadURL;
-    for (int i = 1; i < 7; i++) {
-      istenenImage = firebaseStorage.child("$i.png");
-      downloadURL = await istenenImage.getDownloadURL();
-      imageUrls.add(downloadURL);
+    int size = 19;
+    if (bookID == "paintbookcover") size = 3;
+    if (bookID == "boyacitirmik") size = 34;
+    if (bookID == "kahraman") size = 23;
+    for (int i = 1; i < size; i++) {
+      imageUrls.add('assets/$bookID/' + i.toString() + "-min.jpeg");
     }
+
     return imageUrls;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarim_orman_ebook/bloc/bloc.dart';
+import 'package:tarim_orman_ebook/pages/paintBookPage.dart';
 import 'package:tarim_orman_ebook/pages/readingBooksPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,7 +47,9 @@ class _HomePageState extends State<HomePage> {
                 child: TabBarView(
                   children: [
                     ReadingBookPage(),
-                    Icon(Icons.event),
+                    BlocProvider(
+                        create: (context)=>FirestoreBloc(),
+                        child: PaintBookPage()),
                   ],
                 ),
               ),

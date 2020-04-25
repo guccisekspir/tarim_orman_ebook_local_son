@@ -1,42 +1,24 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_downloader/image_downloader.dart';
-import 'package:page_turn/page_turn.dart';
 import 'package:tarim_orman_ebook/bloc/bloc.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
-import 'dart:math'as math;
-
+import 'dart:math' as math;
 
 class ReadBookPage extends StatefulWidget {
   final String bookChoice;
 
   const ReadBookPage({Key key, this.bookChoice}) : super(key: key);
+
   @override
   _ReadBookPageState createState() => _ReadBookPageState(bookChoice);
 }
 
 class _ReadBookPageState extends State<ReadBookPage> {
   final String bookChoicee;
-  String _message = "";
-  String _path = "";
-  String _size = "";
-  String _mimeType = "";
-  File _imageFile;
-  int _progress = 0;
 
-  List<File> _mulitpleFiles = [];
   @override
   void initState() {
     super.initState();
-
-    ImageDownloader.callback(onProgressUpdate: (String imageId, int progress) {
-      setState(() {
-        _progress = progress;
-      });
-    });
   }
 
   _ReadBookPageState(this.bookChoicee);
@@ -44,53 +26,77 @@ class _ReadBookPageState extends State<ReadBookPage> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final _bloc= BlocProvider.of<FirestoreBloc>(context);
-    final _controller= GlobalKey<PageTurnState>();
+    final _bloc = BlocProvider.of<FirestoreBloc>(context);
 
     return Scaffold(
-    resizeToAvoidBottomInset: false,
-
+      resizeToAvoidBottomInset: false,
       body: BlocBuilder(
         bloc: _bloc,
         // ignore: missing_return
-        builder: (context,FirestoreState state){
-          if(state is InitialFirestoreState){
+        builder: (context, FirestoreState state) {
+          if (state is InitialFirestoreState) {
             _bloc.add(FetchBookImages(bookID: bookChoicee));
-          }
-          else if(state is BookLoadingState){
-            return Center(child: CircularProgressIndicator(),);
-          }
-          else if(state is BookLoadedState){
-            debugPrint("Girdik");
-
+          } else if (state is BookLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is BookLoadedState) {
             return TransformerPageView(
-                loop: false,
-                transformer: new ZoomOutPageTransformer(),
-                itemCount: state.images.length,
-
-                itemBuilder: (BuildContext context, int index) {
-                  return CachedNetworkImage(
-                    imageUrl: state.images[index],
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  );
-                },
-
+              loop: false,
+              transformer: new ZoomOutPageTransformer(),
+              itemCount: state.images.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Stack(
+                  fit: StackFit.passthrough,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(state.images[index]),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20.0,
+                      left: 230.0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 100),
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.blueGrey, // button color
+                            child: InkWell(
+                              splashColor: Colors.teal, // inkwell color
+                              child: SizedBox(
+                                  width: 56,
+                                  height: 56,
+                                  child: Icon(Icons.close,size: 30,)),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
-
-
+              },
+            );
+          } else if (state is BookErrorState) {
+            return Center(
+              child: Text("Hata oluştu"),
+            );
           }
-          else if(state is BookErrorState){
-            return Center(child: Text("Hata oluştu"),);
-          }
-          return Center(child: Text("neaalakamak"),);
+          return Center(
+            child: Text("Hata Oluştu"),
+          );
         },
       ),
     );
   }
-
 }
-
 
 class ZoomOutPageTransformer extends PageTransformer {
   static const double MIN_SCALE = 0.85;
@@ -142,4 +148,3 @@ class ZoomOutPageTransformer extends PageTransformer {
     return child;
   }
 }
-

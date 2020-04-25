@@ -9,9 +9,19 @@ List<String> bookNameList = [
 
 List<String> bookNameFireList = [
   "sirinelma",
-  "Cesur Portakal",
-  "Neşeli Ispanak",
-  "Becerikli Domatesler",
-  "Güçlü Sarımsak",
-  "Akıllı Nar"
+  "cesurportakal",
+  "neselispanak",
+  "beceriklidomates",
+  "guclusarimsak",
+  "akillinar"
+];
+
+List<String> paintBookNameList = [
+  "Boyacı Tırmık",
+  "Kahraman Meyveler",
+];
+
+List<String> paintBookNameFireList = [
+  "boyacitirmik",
+  "kahraman",
 ];
