@@ -20,8 +20,7 @@ class _HomePageState extends State<HomePage> {
             child: Scaffold(
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(
-                    MediaQuery.of(context).size.height /
-                        14), // here the desired height
+                    MediaQuery.of(context).size.height /10), // here the desired height
 
                 child: AppBar(
                   elevation: 0,

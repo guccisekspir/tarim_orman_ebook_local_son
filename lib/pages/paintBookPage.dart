@@ -43,40 +43,39 @@ class _PaintBookPageState extends State<PaintBookPage> {
   }
 
   Widget GridViewBook(List<String> images) {
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = size.height/2;
+    final double itemWidth = size.width / 2;
     return GridView.builder(
         gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
         itemCount: 2,
         itemBuilder: (context, index) {
-          return Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                    width: 140,
-                    height: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Expanded(
-                      child: GestureDetector(
-                        child:
-                        Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlocProvider<FirestoreBloc>(
-                                    create: (context) => FirestoreBloc(),
-                                    child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
+          return Container(
+            width: itemWidth,
+            height: itemHeight,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: GestureDetector(
+                    child:
+                    Container(width: itemWidth,height: itemHeight, child: Image.asset(images[index],fit: BoxFit.fill,)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BlocProvider<FirestoreBloc>(
+                                create: (context) => FirestoreBloc(),
+                                child: PaintBookWidget(bookChoice:paintBookNameFireList[index],),
 
-                                )),
-                          );
-                        },
-                      ),
-                    )),
-              ),
-              Expanded(
-                child: Text(
+                            )),
+                      );
+                    },
+                  ),
+                ),
+                Text(
                   paintBookNameList[index],
                   style: TextStyle(
                     fontSize: 15,
@@ -84,9 +83,9 @@ class _PaintBookPageState extends State<PaintBookPage> {
                   ),
                   textAlign: TextAlign.start,
                   textDirection: TextDirection.ltr,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           );
         });
   }

@@ -45,38 +45,40 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
   }
 
   Widget GridViewBook(List<String> images) {
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = size.height/2;
+    final double itemWidth = size.width / 2;
     return GridView.builder(
+
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: itemWidth/itemHeight,crossAxisSpacing: 10,mainAxisSpacing: 10),
         itemCount: 6,
         itemBuilder: (context, index) {
-          return Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                    width: 100,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: GestureDetector(
-                      child:
-                          Card(elevation: 10, child: Image.asset(images[index],fit: BoxFit.fill,)),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BlocProvider<FirestoreBloc>(
-                                  create: (context) => FirestoreBloc(),
-                                  child: ReadBookPage(
-                                    bookChoice: bookNameFireList[index],
-                                  ))),
-                        );
-                      },
-                    )),
-              ),
-              Expanded(
-                child: Text(
+          return Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+
+              children: <Widget>[
+                Expanded(
+                  child: GestureDetector(
+                    child:
+                        Container(width: itemWidth,height: itemHeight, child: Image.asset(images[index],fit: BoxFit.fill,)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BlocProvider<FirestoreBloc>(
+                                create: (context) => FirestoreBloc(),
+                                child: ReadBookPage(
+                                  bookChoice: bookNameFireList[index],
+                                ))),
+                      );
+                    },
+                  ),
+                ),
+                Text(
                   bookNameList[index],
                   style: TextStyle(
                     fontSize: 15,
@@ -84,9 +86,9 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
                   ),
                   textAlign: TextAlign.start,
                   textDirection: TextDirection.ltr,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           );
         });
   }
