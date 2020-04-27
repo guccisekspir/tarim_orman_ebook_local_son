@@ -76,7 +76,7 @@ class _PaintingPageState extends State<PaintingPage> {
             tooltip: 'Clear',
             onPressed: _controller.clear),
         new IconButton(
-            icon: new Icon(Icons.check),
+            icon: new Icon(Icons.save),
             onPressed: ((){
 
     _imageFile = null;
