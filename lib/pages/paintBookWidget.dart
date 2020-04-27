@@ -99,7 +99,7 @@ class _PaintBookWidgetState extends State<PaintBookWidget> {
                                   width: 56,
                                   height: 56,
                                   child: Center(
-                                      child: Icon(Icons.brush,size: 30,color: Colors.black,))),
+                                      child: Icon(Icons.brush,size: 29,color: Colors.black,))),
                               onTap: () {
                                 Navigator.push(
                                     context,
